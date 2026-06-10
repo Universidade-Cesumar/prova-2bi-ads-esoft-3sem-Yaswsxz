@@ -93,3 +93,72 @@ function atualizarDashboard(lista) {
   if (zerados.length)
     painelAlertas.innerHTML += `<div class="alerta-item zerado">🔴 ${zerados.length} material(is) zerado(s): ${zerados.map(i => escHtml(i.nome)).join(', ')}</div>`;
 }
+
+function renderTabela(lista) {
+  if (!lista.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Nenhum material encontrado.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = lista.map((item, i) => {
+    const qtd      = Number(item.quantidade ?? 0);
+    const catLabel = item.categoria === 'permanente'
+      ? '<span class="chip chip-permanente">Permanente</span>'
+      : '<span class="chip chip-consumo">Consumo</span>';
+    const qtdClass = qtd === 0 ? 'qtd qtd-zero' : 'qtd qtd-normal';
+    const valClass = classValidade(item.validade);
+    const valTexto = textoValidade(item.validade);
+    return `<tr>
+      <td>${i + 1}</td>
+      <td><strong>${escHtml(item.nome ?? '–')}</strong>${item.obs ? `<br><small style="color:var(--sub)">${escHtml(item.obs)}</small>` : ''}</td>
+      <td>${catLabel}</td>
+      <td class="${qtdClass}">${qtd}</td>
+      <td>${escHtml(item.unidade ?? '–')}</td>
+      <td class="${valClass}">${valTexto}</td>
+      <td>${escHtml(item.instrutor ?? '–')}</td>
+      <td class="acoes">
+        <button class="btn-baixar" data-id="${item.id}" data-qtd="${qtd}" title="Registrar retirada">📤 Baixar</button>
+        <button class="btn-excluir" data-id="${item.id}" title="Excluir material">🗑 Excluir</button>
+      </td>
+    </tr>`;
+  }).join('');
+ 
+ 
+  tbody.querySelectorAll('.btn-baixar').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id  = btn.dataset.id;
+      const qtd = Number(btn.dataset.qtd);
+      registrarRetirada(id, qtd);
+    });
+  });
+  tbody.querySelectorAll('.btn-excluir').forEach(btn => {
+    btn.addEventListener('click', () => excluirMaterial(btn.dataset.id));
+  });
+}
+ 
+
+function filtrar() {
+  const termo = inputBusca.value.trim().toLowerCase();
+  const cat   = filtroCat.value;
+  const lista = todosOsMateriais.filter(item => {
+    const nome     = (item.nome ?? '').toLowerCase();
+    const matchNome = !termo || nome.includes(termo);
+    const matchCat  = !cat   || item.categoria === cat;
+    return matchNome && matchCat;
+  });
+  renderTabela(lista);
+}
+ 
+
+async function carregarMateriais() {
+  tbody.innerHTML = '<tr class="empty-row"><td colspan="8"><span class="spinner"></span> Carregando…</td></tr>';
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    todosOsMateriais = await res.json();
+    atualizarDashboard(todosOsMateriais);
+    filtrar();
+  } catch (e) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">❌ Erro ao carregar. Verifique a URL da API.<br><small>${e.message}</small></td></tr>`;
+    totalItens.textContent = 'erro';
+  }
+}
