@@ -62,3 +62,34 @@ function textoValidade(dataStr) {
   return formatarData(dataStr);
 }
  
+function validarRetirada(estoqueAtual, quantidadeRetirar) {
+  if (quantidadeRetirar <= 0) return false;
+  if (quantidadeRetirar > estoqueAtual) return false;
+  return true;
+}
+ 
+
+function atualizarDashboard(lista) {
+  const DIAS_ALERTA = 30;
+  const comValidade = lista.filter(i => {
+    const d = diasParaVencer(i.validade);
+    return d !== null && d <= DIAS_ALERTA;
+  });
+  const zerados = lista.filter(i => Number(i.quantidade) === 0);
+ 
+  totalItens.textContent      = lista.length;
+  totalAlertasVal.textContent = comValidade.length;
+  totalZerados.textContent    = zerados.length;
+ 
+
+  const vencidos = lista.filter(i => { const d = diasParaVencer(i.validade); return d !== null && d < 0; });
+  const vencendo = lista.filter(i => { const d = diasParaVencer(i.validade); return d !== null && d >= 0 && d <= DIAS_ALERTA; });
+ 
+  painelAlertas.innerHTML = '';
+  if (vencidos.length)
+    painelAlertas.innerHTML += `<div class="alerta-item validade">⛔ ${vencidos.length} material(is) com validade VENCIDA: ${vencidos.map(i => escHtml(i.nome)).join(', ')}</div>`;
+  if (vencendo.length)
+    painelAlertas.innerHTML += `<div class="alerta-item validade">⚠ ${vencendo.length} material(is) vencem em até ${DIAS_ALERTA} dias: ${vencendo.map(i => escHtml(i.nome)).join(', ')}</div>`;
+  if (zerados.length)
+    painelAlertas.innerHTML += `<div class="alerta-item zerado">🔴 ${zerados.length} material(is) zerado(s): ${zerados.map(i => escHtml(i.nome)).join(', ')}</div>`;
+}
