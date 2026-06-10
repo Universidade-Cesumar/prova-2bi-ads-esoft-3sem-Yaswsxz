@@ -162,3 +162,80 @@ async function carregarMateriais() {
     totalItens.textContent = 'erro';
   }
 }
+
+async function cadastrarMaterial() {
+  const nome      = inputNome.value.trim();
+  const categoria = inputCat.value;
+  const qtd       = Number(inputQtd.value);
+  const unidade   = inputUnidade.value.trim();
+  const validade  = inputValidade.value;
+  const instrutor = inputInstrutor.value.trim();
+  const obs       = inputObs.value.trim();
+ 
+  if (!nome)             { showToast('Informe o nome do material.', 'erro'); inputNome.focus(); return; }
+  if (!categoria)        { showToast('Selecione a categoria.', 'erro'); inputCat.focus(); return; }
+  if (isNaN(qtd)||qtd<0) { showToast('Quantidade inválida.', 'erro'); inputQtd.focus(); return; }
+ 
+  btnCad.disabled    = true;
+  btnCad.textContent = 'Enviando…';
+ 
+  try {
+    const res = await fetch(API_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ nome, categoria, quantidade: qtd, unidade, validade, instrutor, obs })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+ 
+    [inputNome, inputQtd, inputUnidade, inputValidade, inputInstrutor, inputObs].forEach(el => el.value = '');
+    inputCat.value = '';
+    showToast(`✔ "${nome}" cadastrado!`);
+    await carregarMateriais();
+  } catch (e) {
+    showToast(`Erro: ${e.message}`, 'erro');
+  } finally {
+    btnCad.disabled    = false;
+    btnCad.textContent = 'Cadastrar Material';
+  }
+}
+ 
+// ── PUT – Registrar retirada (baixa) ──
+async function registrarRetirada(id, estoqueAtual) {
+  const qtdRetirar = Number(inputRetirada.value);
+ 
+  if (!validarRetirada(estoqueAtual, qtdRetirar)) {
+    showToast('Quantidade inválida ou maior que o estoque disponível.', 'erro');
+    inputRetirada.focus();
+    return;
+  }
+ 
+  try {
+    const novaQtd = estoqueAtual - qtdRetirar;
+    const res = await fetch(`${API_URL}/${id}`, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ quantidade: novaQtd })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+ 
+    inputRetirada.value = '';
+    showToast(`✔ Retirada de ${qtdRetirar} registrada!`);
+    await carregarMateriais();
+  } catch (e) {
+    showToast(`Erro na retirada: ${e.message}`, 'erro');
+  }
+}
+ 
+// ── DELETE – Excluir material ──
+async function excluirMaterial(id) {
+  if (!confirm('Deseja realmente excluir este material?')) return;
+  try {
+    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    showToast('🗑 Material excluído.');
+    await carregarMateriais();
+  } catch (e) {
+    showToast(`Erro ao excluir: ${e.message}`, 'erro');
+  }
+}
+ 
