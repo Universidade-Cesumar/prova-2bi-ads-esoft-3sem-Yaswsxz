@@ -84,3 +84,75 @@ main {
   gap: .5rem;
 }
 .card-title::after { content: ''; flex: 1; height: 1px; background: var(--borda); }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+}
+.dash-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--verde-l);
+  border: 1px solid var(--borda);
+}
+.dash-item.dash-aviso { background: var(--aviso-l); }
+.dash-item.dash-erro  { background: var(--erro-l); }
+.dash-label { font-size: .72rem; font-weight: 600; text-transform: uppercase; color: var(--sub); letter-spacing: .04em; }
+.dash-valor { font-size: 2rem; font-weight: 800; color: var(--verde); line-height: 1; }
+.dash-aviso .dash-valor { color: var(--aviso); }
+.dash-erro  .dash-valor { color: var(--erro); }
+ 
+/* ── FORM ── */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: .8rem;
+}
+.form-group { display: flex; flex-direction: column; gap: .3rem; }
+ 
+label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+ 
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  border: 1.5px solid var(--borda);
+  border-radius: 6px;
+  padding: .5rem .7rem;
+  font-size: .9rem;
+  color: var(--texto);
+  outline: none;
+  transition: border-color .18s;
+  width: 100%;
+  background: var(--branco);
+}
+input:focus, select:focus { border-color: var(--verde-c); }
+ 
+.form-actions { display: flex; justify-content: flex-end; margin-top: .8rem; }
+ 
+#btn-cadastrar {
+  padding: .6rem 1.6rem;
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s, transform .1s;
+}
+#btn-cadastrar:hover   { background: var(--verde-c); }
+#btn-cadastrar:active  { transform: scale(.97); }
+#btn-cadastrar:disabled { opacity: .55; cursor: not-allowed; }
