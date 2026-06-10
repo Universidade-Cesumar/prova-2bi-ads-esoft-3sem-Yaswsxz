@@ -22,3 +22,43 @@ const totalAlertasVal= document.getElementById('total-alertas-val');
 const totalZerados   = document.getElementById('total-zerados');
  
 let todosOsMateriais = [];
+
+let toastTimer;
+function showToast(msg, tipo = 'ok') {
+  clearTimeout(toastTimer);
+  toast.textContent = msg;
+  toast.className   = `show${tipo === 'erro' ? ' erro' : ''}`;
+  toastTimer = setTimeout(() => { toast.className = ''; }, 3500);
+}
+ 
+
+function diasParaVencer(dataStr) {
+  if (!dataStr) return null;
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  const venc = new Date(dataStr + 'T00:00:00');
+  return Math.floor((venc - hoje) / 86400000);
+}
+ 
+function formatarData(dataStr) {
+  if (!dataStr) return '–';
+  const [a, m, d] = dataStr.split('-');
+  return `${d}/${m}/${a}`;
+}
+ 
+function classValidade(dataStr) {
+  const d = diasParaVencer(dataStr);
+  if (d === null) return '';
+  if (d < 0)   return 'val-vencido';
+  if (d <= 30) return 'val-aviso';
+  return 'val-ok';
+}
+ 
+function textoValidade(dataStr) {
+  const d = diasParaVencer(dataStr);
+  if (d === null) return '–';
+  if (d < 0)   return `${formatarData(dataStr)} ⚠ VENCIDO`;
+  if (d === 0) return 'Vence hoje!';
+  if (d <= 30) return `${formatarData(dataStr)} (${d}d)`;
+  return formatarData(dataStr);
+}
+ 
