@@ -199,7 +199,7 @@ async function cadastrarMaterial() {
   }
 }
  
-// ── PUT – Registrar retirada (baixa) ──
+
 async function registrarRetirada(id, estoqueAtual) {
   const qtdRetirar = Number(inputRetirada.value);
  
@@ -226,7 +226,7 @@ async function registrarRetirada(id, estoqueAtual) {
   }
 }
  
-// ── DELETE – Excluir material ──
+
 async function excluirMaterial(id) {
   if (!confirm('Deseja realmente excluir este material?')) return;
   try {
@@ -239,3 +239,39 @@ async function excluirMaterial(id) {
   }
 }
  
+function exportarCSV() {
+  if (!todosOsMateriais.length) { showToast('Nenhum dado para exportar.', 'erro'); return; }
+  const header = ['Nome', 'Categoria', 'Quantidade', 'Unidade', 'Validade', 'Instrutor', 'Observações'];
+  const rows   = todosOsMateriais.map(i => [
+    i.nome ?? '', i.categoria ?? '', i.quantidade ?? '', i.unidade ?? '',
+    i.validade ? formatarData(i.validade) : '',
+    i.instrutor ?? '', i.obs ?? ''
+  ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(','));
+  const csv  = [header.join(','), ...rows].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'estoque_almoxarifado.csv'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('📥 Exportado com sucesso!');
+}
+ 
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+ 
+
+btnCad.addEventListener('click', cadastrarMaterial);
+btnRefresh.addEventListener('click', carregarMateriais);
+btnExportar.addEventListener('click', exportarCSV);
+inputBusca.addEventListener('input', filtrar);
+filtroCat.addEventListener('change', filtrar);
+[inputNome, inputQtd].forEach(el =>
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') cadastrarMaterial(); })
+);
+ 
+
+carregarMateriais();
