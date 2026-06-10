@@ -1,5 +1,4 @@
-/* Caso queira utilizar framework como Bootstrap para estilização, pode utilizar. Basta ignoar esse arquivo */*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --verde:   #1a6b45;
   --verde-c: #2a9964;
@@ -16,3 +15,26 @@
   --ok:      #1a6b45;
   --shadow:  0 2px 10px rgba(0,0,0,.08);
 }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--cinza);
+  color: var(--texto);
+  min-height: 100vh;
+}
+ 
+/* ── HEADER ── */
+header {
+  background: var(--verde);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header h1 { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+header p  { font-size: .78rem; opacity: .85; }
