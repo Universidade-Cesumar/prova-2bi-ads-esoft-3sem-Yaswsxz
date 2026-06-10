@@ -203,3 +203,76 @@ input:focus, select:focus { border-color: var(--verde-c); }
   white-space: nowrap;
 }
 #btn-refresh:hover { border-color: var(--verde-c); color: var(--verde); }
+
+.table-wrap { overflow-x: auto; border-radius: 6px; border: 1px solid var(--borda); }
+table       { width: 100%; border-collapse: collapse; font-size: .87rem; }
+thead tr    { background: var(--verde); color: #fff; }
+th { padding: .65rem .9rem; text-align: left; font-weight: 600; white-space: nowrap; }
+tbody tr { border-bottom: 1px solid var(--borda); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--verde-l); }
+td { padding: .6rem .9rem; vertical-align: middle; }
+td.qtd      { font-weight: 700; }
+.qtd-zero   { color: var(--erro); }
+.qtd-normal { color: var(--verde); }
+ 
+.chip { display: inline-block; border-radius: 12px; padding: .15rem .6rem; font-size: .75rem; font-weight: 700; }
+.chip-consumo    { background: #dbeafe; color: #1e40af; }
+.chip-permanente { background: #f3e8ff; color: #7e22ce; }
+ 
+.val-ok      { color: var(--verde); font-size: .82rem; }
+.val-aviso   { color: var(--aviso); font-size: .82rem; font-weight: 700; }
+.val-vencido { color: var(--erro);  font-size: .82rem; font-weight: 700; }
+ 
+.empty-row td { text-align: center; color: var(--sub); padding: 2.5rem; font-style: italic; }
+ 
+/* ── AÇÕES ── */
+td.acoes { white-space: nowrap; display: flex; gap: .4rem; }
+.btn-baixar,
+.btn-excluir {
+  padding: .3rem .65rem;
+  border: none;
+  border-radius: 5px;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .18s;
+}
+.btn-baixar  { background: var(--verde-l); color: var(--verde); }
+.btn-excluir { background: var(--erro-l);  color: var(--erro); }
+.btn-baixar:hover,
+.btn-excluir:hover { opacity: .75; }
+ 
+/* ── SPINNER ── */
+.spinner {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2.5px solid var(--borda);
+  border-top-color: var(--verde);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+ 
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--ok);
+  color: #fff;
+  padding: .75rem 1.2rem;
+  border-radius: 8px;
+  font-size: .88rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity .25s, transform .25s;
+  z-index: 999;
+  max-width: 90vw;
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+#toast.erro { background: var(--erro); }
