@@ -156,3 +156,50 @@ input:focus, select:focus { border-color: var(--verde-c); }
 #btn-cadastrar:hover   { background: var(--verde-c); }
 #btn-cadastrar:active  { transform: scale(.97); }
 #btn-cadastrar:disabled { opacity: .55; cursor: not-allowed; }
+
+.retirada-info {
+  font-size: .85rem;
+  color: var(--sub);
+  margin-top: .6rem;
+  padding: .6rem .8rem;
+  background: var(--cinza);
+  border-radius: 6px;
+  border-left: 3px solid var(--verde);
+}
+
+.filtros {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  align-items: flex-end;
+}
+.filtros input,
+.filtros select { flex: 1; min-width: 160px; }
+ 
+#btn-exportar {
+  padding: .5rem 1rem;
+  background: none;
+  border: 1.5px solid var(--verde);
+  color: var(--verde);
+  border-radius: 6px;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s;
+}
+#btn-exportar:hover { background: var(--verde-l); }
+ 
+#btn-refresh {
+  background: none;
+  border: 1.5px solid var(--borda);
+  border-radius: 6px;
+  padding: .45rem .9rem;
+  font-size: .82rem;
+  cursor: pointer;
+  color: var(--sub);
+  transition: border-color .18s;
+  white-space: nowrap;
+}
+#btn-refresh:hover { border-color: var(--verde-c); color: var(--verde); }
