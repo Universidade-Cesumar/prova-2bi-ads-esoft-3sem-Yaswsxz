@@ -57,3 +57,30 @@ header p  { font-size: .78rem; opacity: .85; }
 }
 .alerta-item.validade { background: var(--aviso-l); color: var(--aviso); border: 1px solid #fcd34d; }
 .alerta-item.zerado   { background: var(--erro-l);  color: var(--erro);  border: 1px solid #fca5a5; }
+
+main {
+  max-width: 920px;
+  margin: 1.2rem auto 2rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+ 
+.card {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--verde);
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.card-title::after { content: ''; flex: 1; height: 1px; background: var(--borda); }
