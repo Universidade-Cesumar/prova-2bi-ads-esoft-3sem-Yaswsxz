@@ -23,7 +23,6 @@ body {
   min-height: 100vh;
 }
  
-/* ── HEADER ── */
 header {
   background: var(--verde);
   color: #fff;
@@ -38,3 +37,23 @@ header {
 }
 header h1 { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
 header p  { font-size: .78rem; opacity: .85; }
+
+#painel-alertas {
+  max-width: 920px;
+  margin: .8rem auto 0;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.alerta-item {
+  border-radius: 8px;
+  padding: .65rem 1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.alerta-item.validade { background: var(--aviso-l); color: var(--aviso); border: 1px solid #fcd34d; }
+.alerta-item.zerado   { background: var(--erro-l);  color: var(--erro);  border: 1px solid #fca5a5; }
