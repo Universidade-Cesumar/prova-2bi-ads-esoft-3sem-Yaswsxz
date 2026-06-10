@@ -58,7 +58,7 @@ almoxarifado-senac/
 A aplicação consome uma API RESTful simulada criada no [MockAPI.io](https://mockapi.io). O endpoint principal segue o padrão:
 
 ```
-https://<seu-id>.mockapi.io/materiais
+https://mockapi.io/clone/6a29f2f6f59cb8f65f1ddad7
 ```
 
 ### Modelo de recurso `material`
@@ -93,7 +93,7 @@ https://<seu-id>.mockapi.io/materiais
 2. Crie um projeto no [MockAPI.io](https://mockapi.io) e adicione o recurso `materiais` com os campos acima
 3. No arquivo `main.js`, configure a variável com a URL da sua API:
    ```js
-   const API_URL = 'https://<seu-id>.mockapi.io/materiais';
+   const API_URL = 'https://mockapi.io/clone/6a29f2f6f59cb8f65f1ddad7';
    ```
 4. Abra o `index.html` no navegador — não é necessário servidor local
 
@@ -113,9 +113,9 @@ O sistema utiliza uma paleta verde institucional, alinhada ao contexto de saúde
 
 ---
 
-## 👩‍💻 Autora
+## 👩‍💻 Autora Yasmin Fernanda de Carvalho
 
-Desenvolvido como projeto de avaliação do curso técnico — **SENAC Zona Norte**.
+Desenvolvido como projeto de avaliação para o SENAC — **SENAC Zona Norte**.
 
 ---
 
