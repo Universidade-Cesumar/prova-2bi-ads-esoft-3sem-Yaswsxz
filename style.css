@@ -342,3 +342,46 @@ td.acoes { white-space: nowrap; display: flex; gap: .45rem; }
   vertical-align: middle;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+#toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--verde);
+  color: #fff;
+  padding: .75rem 1.2rem;
+  border-radius: var(--raio-sm);
+  font-size: .87rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(16, 24, 32, .18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .22s, transform .22s;
+  z-index: 999;
+  max-width: 90vw;
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+#toast.erro { background: var(--erro); }
+ 
+
+footer {
+  text-align: center;
+  padding: 1.75rem 1rem;
+  font-size: .73rem;
+  color: var(--sub-fraco);
+}
+ 
+
+@media (max-width: 760px) {
+  .linha-acoes { grid-template-columns: 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr 1fr; }
+}
+ 
+@media (max-width: 520px) {
+  header h1 { font-size: 1rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  #btn-cadastrar { width: 100%; }
+  th, td { padding: .55rem .65rem; font-size: .8rem; }
+  td.acoes { flex-direction: column; }
+}
