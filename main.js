@@ -164,5 +164,41 @@ function renderizarTabela(lista) {
     })
     .join('');
 }
+ function atualizarDashboard(lista) {
+  const totalItens = lista.length;
+  const totalZerados = lista.filter((m) => Number(m.quantidade) === 0).length;
+  const totalAlertasValidade = lista.filter((m) => {
+    if (!m.validade) return false;
+    const dias = diasParaVencer(m.validade);
+    return dias !== null && dias <= 30;
+  }).length;
+ 
+  document.getElementById('total-itens').textContent = totalItens;
+  document.getElementById('total-alertas-val').textContent = totalAlertasValidade;
+  document.getElementById('total-zerados').textContent = totalZerados;
+}
+ 
+function atualizarAlertas(lista) {
+  const painel = document.getElementById('painel-alertas');
+  if (!painel) return;
+ 
+  const vencendoOuVencidos = lista.filter((m) => {
+    if (!m.validade) return false;
+    const dias = diasParaVencer(m.validade);
+    return dias !== null && dias <= 30;
+  });
+  const zerados = lista.filter((m) => Number(m.quantidade) === 0);
+ 
+  let html = '';
+ 
+  if (vencendoOuVencidos.length > 0) {
+    html += `<div class="alerta-item validade">⚠️ ${vencendoOuVencidos.length} item(ns) com validade vencida ou próxima do vencimento.</div>`;
+  }
+  if (zerados.length > 0) {
+    html += `<div class="alerta-item zerado">⛔ ${zerados.length} item(ns) com estoque zerado.</div>`;
+  }
+ 
+  painel.innerHTML = html;
+}
  
  
