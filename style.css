@@ -267,3 +267,78 @@ input:focus, select:focus {
   white-space: nowrap;
 }
 #btn-refresh:hover { border-color: var(--verde-c); color: var(--verde); }
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--raio-sm);
+  border: 1px solid var(--borda);
+}
+table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+ 
+thead tr { background: var(--fundo); }
+th {
+  padding: .75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: .73rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--sub);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--borda);
+}
+ 
+tbody tr { border-bottom: 1px solid var(--borda); transition: background .12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:nth-child(even) { background: #fafbfc; }
+tbody tr:hover { background: var(--verde-l); }
+ 
+td { padding: .7rem 1rem; vertical-align: middle; }
+td.qtd      { font-weight: 700; font-variant-numeric: tabular-nums; }
+.qtd-zero   { color: var(--erro); }
+.qtd-normal { color: var(--texto); }
+ 
+.chip {
+  display: inline-block;
+  border-radius: 4px;
+  padding: .2rem .55rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.chip-consumo    { background: #e8f0fe; color: #1a56b3; }
+.chip-permanente { background: #f3eafd; color: #6b30b0; }
+ 
+.val-ok      { color: var(--sub); font-size: .82rem; }
+.val-aviso   { color: var(--aviso); font-size: .82rem; font-weight: 700; }
+.val-vencido { color: var(--erro);  font-size: .82rem; font-weight: 700; }
+ 
+.empty-row td { text-align: center; color: var(--sub-fraco); padding: 3rem; font-style: italic; }
+ 
+
+td.acoes { white-space: nowrap; display: flex; gap: .45rem; }
+.btn-baixar,
+.btn-excluir {
+  padding: .35rem .7rem;
+  border: 1px solid transparent;
+  border-radius: var(--raio-sm);
+  font-size: .76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s, background .15s;
+}
+.btn-baixar  { background: var(--verde-l); color: var(--verde); }
+.btn-excluir { background: var(--erro-l);  color: var(--erro); }
+.btn-baixar:hover  { background: var(--verde-borda); }
+.btn-excluir:hover { background: var(--erro-borda); }
+ 
+
+.spinner {
+  display: inline-block;
+  width: 15px; height: 15px;
+  border: 2px solid var(--borda-forte);
+  border-top-color: var(--verde);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
