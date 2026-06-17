@@ -164,3 +164,106 @@ main {
 }
 .dash-aviso .dash-valor { color: var(--aviso); }
 .dash-erro  .dash-valor { color: var(--erro); }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+}
+.form-group { display: flex; flex-direction: column; gap: .35rem; }
+ 
+label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+ 
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-sm);
+  padding: .55rem .7rem;
+  font-size: .9rem;
+  font-family: inherit;
+  color: var(--texto);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  width: 100%;
+  background: var(--superficie);
+}
+input::placeholder { color: var(--sub-fraco); }
+input:focus, select:focus {
+  border-color: var(--verde-c);
+  box-shadow: 0 0 0 3px var(--verde-l);
+}
+ 
+.form-actions { display: flex; justify-content: flex-end; margin-top: 1.1rem; }
+ 
+#btn-cadastrar {
+  padding: .65rem 1.5rem;
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  border-radius: var(--raio-sm);
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+#btn-cadastrar:hover   { background: var(--verde-c); }
+#btn-cadastrar:active  { transform: scale(.98); }
+#btn-cadastrar:disabled { opacity: .5; cursor: not-allowed; }
+ 
+
+.retirada-info {
+  font-size: .83rem;
+  color: var(--sub);
+  margin-top: .85rem;
+  padding: .7rem .85rem;
+  background: var(--verde-l);
+  border-radius: var(--raio-sm);
+  border-left: 3px solid var(--verde);
+}
+.retirada-info strong { color: var(--verde); }
+ 
+
+.filtros {
+  display: flex;
+  gap: .65rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  align-items: flex-end;
+}
+.filtros input,
+.filtros select { flex: 1; min-width: 160px; }
+ 
+#btn-exportar {
+  padding: .55rem 1.1rem;
+  background: var(--superficie);
+  border: 1px solid var(--verde);
+  color: var(--verde);
+  border-radius: var(--raio-sm);
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+#btn-exportar:hover { background: var(--verde-l); }
+ 
+#btn-refresh {
+  background: var(--superficie);
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-sm);
+  padding: .55rem 1rem;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--sub);
+  transition: border-color .15s, color .15s;
+  white-space: nowrap;
+}
+#btn-refresh:hover { border-color: var(--verde-c); color: var(--verde); }
