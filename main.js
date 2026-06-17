@@ -53,3 +53,54 @@ async function carregarMateriais() {
     mostrarToast('Erro ao carregar materiais da API.', 'erro');
   }
 }
+async function cadastrarMaterial(material) {
+  try {
+    const resposta = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(material)
+    });
+ 
+    if (!resposta.ok) throw new Error('Falha ao cadastrar material (status ' + resposta.status + ')');
+ 
+    await carregarMateriais();
+    mostrarToast('Material cadastrado com sucesso!');
+  } catch (erro) {
+    console.error('Erro ao cadastrar material:', erro);
+    mostrarToast('Erro ao cadastrar material.', 'erro');
+  }
+}
+ 
+
+async function registrarBaixa(id, quantidadeRetirada) {
+  const material = materiais.find((m) => String(m.id) === String(id));
+  if (!material) {
+    mostrarToast('Material não encontrado.', 'erro');
+    return;
+  }
+ 
+  const valido = validarRetirada(material.quantidade, quantidadeRetirada);
+  if (!valido) {
+    mostrarToast('Quantidade inválida para retirada.', 'erro');
+    return;
+  }
+ 
+  const novaQuantidade = Number(material.quantidade) - Number(quantidadeRetirada);
+ 
+  try {
+    const resposta = await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...material, quantidade: novaQuantidade })
+    });
+ 
+    if (!resposta.ok) throw new Error('Falha ao atualizar estoque (status ' + resposta.status + ')');
+ 
+    await carregarMateriais();
+    mostrarToast(`Baixa de ${quantidadeRetirada} unidade(s) registrada em "${material.nome}".`);
+  } catch (erro) {
+    console.error('Erro ao registrar baixa:', erro);
+    mostrarToast('Erro ao registrar baixa no servidor.', 'erro');
+  }
+}
+ 
