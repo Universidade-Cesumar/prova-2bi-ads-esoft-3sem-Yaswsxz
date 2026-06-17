@@ -293,5 +293,45 @@ function configurarFormularioCadastro() {
     document.getElementById('input-obs').value = '';
   });
 }
+ function configurarEventosTabela() {
+  const tbody = document.getElementById('lista-materiais');
  
+  tbody.addEventListener('click', async (evento) => {
+    const id = evento.target.getAttribute('data-id');
+    if (!id) return;
+ 
+    if (evento.target.classList.contains('btn-baixar')) {
+      const inputRetirada = document.getElementById('input-retirada');
+      const quantidadeRetirada = Number(inputRetirada.value);
+ 
+      if (!inputRetirada.value || quantidadeRetirada <= 0) {
+        mostrarToast('Informe a quantidade a retirar antes de clicar em Baixar.', 'erro');
+        return;
+      }
+ 
+      await registrarBaixa(id, quantidadeRetirada);
+      inputRetirada.value = '';
+    }
+ 
+    if (evento.target.classList.contains('btn-excluir')) {
+      await excluirMaterial(id);
+    }
+  });
+}
+ 
+
+function configurarFiltrosEAcoes() {
+  document.getElementById('input-busca').addEventListener('input', aplicarFiltros);
+  document.getElementById('filtro-cat').addEventListener('change', aplicarFiltros);
+  document.getElementById('btn-exportar').addEventListener('click', exportarCSV);
+  document.getElementById('btn-refresh').addEventListener('click', carregarMateriais);
+}
+ 
+
+document.addEventListener('DOMContentLoaded', () => {
+  configurarFormularioCadastro();
+  configurarEventosTabela();
+  configurarFiltrosEAcoes();
+  carregarMateriais();
+});
  
