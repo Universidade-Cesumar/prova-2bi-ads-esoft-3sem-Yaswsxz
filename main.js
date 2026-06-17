@@ -200,5 +200,98 @@ function atualizarAlertas(lista) {
  
   painel.innerHTML = html;
 }
+function aplicarFiltros() {
+  const termoBusca = document.getElementById('input-busca').value.trim().toLowerCase();
+  const categoria = document.getElementById('filtro-cat').value;
+ 
+  let listaFiltrada = materiais;
+ 
+  if (termoBusca) {
+    listaFiltrada = listaFiltrada.filter((m) =>
+      (m.nome || '').toLowerCase().includes(termoBusca)
+    );
+  }
+ 
+  if (categoria) {
+    listaFiltrada = listaFiltrada.filter((m) => m.categoria === categoria);
+  }
+ 
+  renderizarTabela(listaFiltrada);
+}
+ 
+
+function exportarCSV() {
+  if (!materiais || materiais.length === 0) {
+    mostrarToast('Não há materiais para exportar.', 'erro');
+    return;
+  }
+ 
+  const cabecalho = ['Nome', 'Categoria', 'Quantidade', 'Unidade', 'Validade', 'Instrutor', 'Observacoes'];
+  const linhas = materiais.map((m) => [
+    m.nome || '',
+    m.categoria || '',
+    m.quantidade ?? '',
+    m.unidade || '',
+    m.validade || '',
+    m.instrutor || '',
+    (m.obs || '').replace(/,/g, ';')
+  ]);
+ 
+  const conteudoCSV = [cabecalho, ...linhas].map((linha) => linha.join(',')).join('\n');
+ 
+  const blob = new Blob([conteudoCSV], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'almoxarifado_senac.csv';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+ 
+  mostrarToast('CSV exportado com sucesso!');
+}
+
+function configurarFormularioCadastro() {
+  const btnCadastrar = document.getElementById('btn-cadastrar');
+ 
+  btnCadastrar.addEventListener('click', async () => {
+    const nome = document.getElementById('input-nome').value.trim();
+    const categoria = document.getElementById('input-categoria').value;
+    const quantidade = document.getElementById('input-quantidade').value;
+    const unidade = document.getElementById('input-unidade').value.trim();
+    const validade = document.getElementById('input-validade').value;
+    const instrutor = document.getElementById('input-instrutor').value.trim();
+    const obs = document.getElementById('input-obs').value.trim();
+ 
+    if (!nome || !categoria || quantidade === '' || Number(quantidade) < 0) {
+      mostrarToast('Preencha os campos obrigatórios corretamente.', 'erro');
+      return;
+    }
+ 
+    const novoMaterial = {
+      nome,
+      categoria,
+      quantidade: Number(quantidade),
+      unidade,
+      validade,
+      instrutor,
+      obs
+    };
+ 
+    btnCadastrar.disabled = true;
+    await cadastrarMaterial(novoMaterial);
+    btnCadastrar.disabled = false;
+ 
+   
+    document.getElementById('input-nome').value = '';
+    document.getElementById('input-categoria').value = '';
+    document.getElementById('input-quantidade').value = '';
+    document.getElementById('input-unidade').value = '';
+    document.getElementById('input-validade').value = '';
+    document.getElementById('input-instrutor').value = '';
+    document.getElementById('input-obs').value = '';
+  });
+}
  
  
