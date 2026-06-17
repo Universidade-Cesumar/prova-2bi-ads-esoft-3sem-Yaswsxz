@@ -28,3 +28,61 @@
   --raio-sm:    6px;
   --sombra:     0 1px 2px rgba(16, 24, 32, .04), 0 4px 14px rgba(16, 24, 32, .05);
 }
+html { font-size: 16px; }
+ 
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+ 
+
+header {
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+  color: var(--texto);
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header svg { stroke: var(--verde); flex-shrink: 0; }
+header h1 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+header p {
+  font-size: .78rem;
+  color: var(--sub);
+  margin-top: .1rem;
+}
+ 
+
+#painel-alertas {
+  max-width: 980px;
+  margin: 1rem auto 0;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.alerta-item {
+  border-radius: var(--raio-sm);
+  padding: .7rem 1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  border: 1px solid transparent;
+}
+.alerta-item.validade { background: var(--aviso-l); color: var(--aviso); border-color: var(--aviso-borda); }
+.alerta-item.zerado   { background: var(--erro-l);  color: var(--erro);  border-color: var(--erro-borda); }
