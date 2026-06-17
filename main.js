@@ -103,4 +103,66 @@ async function registrarBaixa(id, quantidadeRetirada) {
     mostrarToast('Erro ao registrar baixa no servidor.', 'erro');
   }
 }
+async function excluirMaterial(id) {
+  const material = materiais.find((m) => String(m.id) === String(id));
+  const nome = material ? material.nome : 'material';
+ 
+  if (!confirm(`Tem certeza que deseja excluir "${nome}" do estoque?`)) return;
+ 
+  try {
+    const resposta = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    if (!resposta.ok) throw new Error('Falha ao excluir material (status ' + resposta.status + ')');
+ 
+    await carregarMateriais();
+    mostrarToast(`"${nome}" excluído do estoque.`);
+  } catch (erro) {
+    console.error('Erro ao excluir material:', erro);
+    mostrarToast('Erro ao excluir material.', 'erro');
+  }
+}
+ 
+
+function renderizarTabela(lista) {
+  const tbody = document.getElementById('lista-materiais');
+ 
+  if (!lista || lista.length === 0) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Nenhum material cadastrado.</td></tr>';
+    return;
+  }
+ 
+  tbody.innerHTML = lista
+    .map((m, index) => {
+      const qtd = Number(m.quantidade) || 0;
+      const qtdClasse = qtd === 0 ? 'qtd-zero' : 'qtd-normal';
+      const chipClasse = m.categoria === 'permanente' ? 'chip-permanente' : 'chip-consumo';
+      const chipLabel = m.categoria === 'permanente' ? 'Permanente' : 'Consumo';
+ 
+      let validadeHtml = '—';
+      if (m.validade) {
+        const dias = diasParaVencer(m.validade);
+        let classeValidade = 'val-ok';
+        if (dias < 0) classeValidade = 'val-vencido';
+        else if (dias <= 30) classeValidade = 'val-aviso';
+        validadeHtml = `<span class="${classeValidade}">${formatarData(m.validade)}</span>`;
+      }
+ 
+      return `
+        <tr data-id="${m.id}">
+          <td>${index + 1}</td>
+          <td>${m.nome || '—'}</td>
+          <td><span class="chip ${chipClasse}">${chipLabel}</span></td>
+          <td class="qtd ${qtdClasse}">${qtd}</td>
+          <td>${m.unidade || '—'}</td>
+          <td>${validadeHtml}</td>
+          <td>${m.instrutor || '—'}</td>
+          <td class="acoes">
+            <button class="btn-baixar" data-id="${m.id}">Baixar</button>
+            <button class="btn-excluir" data-id="${m.id}">Excluir</button>
+          </td>
+        </tr>
+      `;
+    })
+    .join('');
+}
+ 
  
