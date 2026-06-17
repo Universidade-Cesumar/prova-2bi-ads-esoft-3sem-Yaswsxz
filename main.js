@@ -35,3 +35,21 @@ function diasParaVencer(dataStr) {
   const diffMs = validade - hoje;
   return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
   }
+async function carregarMateriais() {
+  const tbody = document.getElementById('lista-materiais');
+  tbody.innerHTML = '<tr class="empty-row"><td colspan="8"><span class="spinner"></span> Carregando…</td></tr>';
+ 
+  try {
+    const resposta = await fetch(API_URL);
+    if (!resposta.ok) throw new Error('Falha ao buscar materiais (status ' + resposta.status + ')');
+ 
+    materiais = await resposta.json();
+    renderizarTabela(materiais);
+    atualizarDashboard(materiais);
+    atualizarAlertas(materiais);
+  } catch (erro) {
+    console.error('Erro ao carregar materiais:', erro);
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Erro ao carregar dados. Tente atualizar novamente.</td></tr>';
+    mostrarToast('Erro ao carregar materiais da API.', 'erro');
+  }
+}
