@@ -1,5 +1,7 @@
 # Sistema de Controle de Almoxarifado — SENAC Zona Norte
 
+🔗 **Acesse o projeto no ar:** https://universidade-cesumar.github.io/prova-2bi-ads-esoft-3sem-Yaswsxz/
+
 Aplicação web para gerenciamento de materiais e insumos do Curso Técnico de Enfermagem do SENAC Zona Norte.
 
 ## Contexto do Problema
@@ -17,6 +19,7 @@ Uma aplicação web com front-end conectado a uma API RESTful simulada via MockA
 - Registro de retirada (baixa de estoque), com validação contra negativos, zero ou valores acima do estoque
 - Exclusão de materiais, com confirmação antes de remover
 - Alertas automáticos de validade próxima (30 dias) e estoque zerado
+- Destaque visual de estoque crítico para itens com menos de 10 unidades
 - Filtro por nome e categoria em tempo real
 - Exportação do estoque para CSV
 - Notificações toast de sucesso e erro
@@ -34,6 +37,7 @@ Uma aplicação web com front-end conectado a uma API RESTful simulada via MockA
 | async / await | Controle de fluxo assíncrono |
 | MockAPI.io | Back-end simulado via API RESTful |
 | Jest + jsdom | Testes automatizados de front-end |
+| GitHub Pages | Hospedagem e publicação do projeto |
 
 ## Estrutura do Projeto
 
@@ -42,6 +46,7 @@ almoxarifado-senac/
 ├── index.html
 ├── style.css
 ├── main.js
+├── package.json
 └── __tests__/
     ├── sprint1.test.js
     ├── sprint2.test.js
@@ -96,6 +101,10 @@ validarRetirada(10, -2);  // false
 validarRetirada(10, 0);   // false
 ```
 
+## Estoque Crítico
+
+Cada linha da tabela recebe a classe `estoque-critico` sempre que a quantidade do item for menor que 10 unidades, destacando visualmente quem precisa de reposição urgente. A classe é aplicada dinamicamente pelo `main.js` na renderização da tabela.
+
 ## Testes Automatizados
 
 | Arquivo | Cobertura |
@@ -107,11 +116,13 @@ validarRetirada(10, 0);   // false
 Para executar:
 
 ```bash
-npm install --save-dev jest jest-environment-jsdom
-npx jest --testEnvironment=jsdom
+npm install
+npm run test:sprint1
+npm run test:sprint2
+npm run test:sprint3
 ```
 
-## Como Executar
+## Como Executar Localmente
 
 1. Clone ou baixe os arquivos do projeto
 2. Crie um projeto no MockAPI.io e adicione o recurso `materiais` com os campos listados acima
@@ -126,7 +137,7 @@ npx jest --testEnvironment=jsdom
 | --verde-c | #16804f | Hover de botões e foco de campos |
 | --verde-l | #eef7f2 | Fundos suaves, chips de status |
 | --aviso | #9a5b00 | Alertas de validade próxima |
-| --erro | #b3261e | Itens zerados, ações destrutivas |
+| --erro | #b3261e | Itens zerados, estoque crítico, ações destrutivas |
 
 ## Autora
 
