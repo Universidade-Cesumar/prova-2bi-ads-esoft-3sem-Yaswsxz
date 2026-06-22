@@ -4,147 +4,83 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Almoxarifado – SENAC</title>
+ 
+  
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
  
-<header>
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L11 21.73a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z"/>
-    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-    <line x1="12" y1="22.08" x2="12" y2="12"/>
-  </svg>
-  <div>
-    <h1>Controle de Almoxarifado</h1>
-    <p>SENAC – Curso Técnico de Enfermagem</p>
-  </div>
-</header>
-
-<div id="painel-alertas"></div>
- 
-<main>
- 
-  
-  <div class="dashboard-grid">
-    <div class="dash-item">
-      <span class="dash-label">Total de Itens</span>
-      <span class="dash-valor" id="total-itens">–</span>
+  <header>
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L11 21.73a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z"/>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+      <line x1="12" y1="22.08" x2="12" y2="12"/>
+    </svg>
+    <div>
+      <h1>Controle de Almoxarifado</h1>
+      <p>SENAC – Curso Técnico de Enfermagem</p>
     </div>
-    <div class="dash-item dash-aviso">
-      <span class="dash-label">Alertas de Validade</span>
-      <span class="dash-valor" id="total-alertas-val">–</span>
-    </div>
-    <div class="dash-item dash-erro">
-      <span class="dash-label">Itens Zerados</span>
-      <span class="dash-valor" id="total-zerados">–</span>
-    </div>
-  </div>
+  </header>
  
-  
-  <div class="linha-acoes">
+  <div id="painel-alertas"></div>
  
-    
-    <div class="card">
-      <div class="card-title">Cadastrar novo material</div>
-      <div class="form-grid">
-        <div class="form-group" style="grid-column:span 2; min-width:0;">
-          <label for="input-nome">Nome do Material *</label>
-          <input type="text" id="input-nome" placeholder="Ex: Luvas de procedimento" autocomplete="off"/>
-        </div>
-        <div class="form-group">
-          <label for="input-categoria">Categoria *</label>
-          <select id="input-categoria">
-            <option value="">Selecione…</option>
-            <option value="consumo">Consumo (descartáveis)</option>
-            <option value="permanente">Permanente (equipamentos)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="input-quantidade">Quantidade *</label>
-          <input type="number" id="input-quantidade" placeholder="0" min="0"/>
-        </div>
-        <div class="form-group">
-          <label for="input-unidade">Unidade de Medida</label>
-          <input type="text" id="input-unidade" placeholder="Ex: Caixa, Unidade, Litro"/>
-        </div>
-        <div class="form-group">
-          <label for="input-validade">Data de Validade</label>
-          <input type="date" id="input-validade"/>
-        </div>
-        <div class="form-group" style="grid-column:span 2; min-width:0;">
-          <label for="input-instrutor">Instrutor Responsável</label>
-          <input type="text" id="input-instrutor" placeholder="Nome do instrutor ou setor"/>
-        </div>
-        <div class="form-group" style="grid-column:span 2; min-width:0;">
-          <label for="input-obs">Observações</label>
-          <input type="text" id="input-obs" placeholder="Fornecedor, lote, anotações…"/>
-        </div>
+  <main>
+    <div class="dashboard-grid">
+      <div class="dash-item">
+        <span class="dash-label">Total de Itens</span>
+        <span class="dash-valor" id="total-itens">–</span>
       </div>
-      <div class="form-actions">
-        <button id="btn-cadastrar">Cadastrar Material</button>
+      <div class="dash-item dash-aviso">
+        <span class="dash-label">Alertas de Validade</span>
+        <span class="dash-valor" id="total-alertas-val">–</span>
+      </div>
+      <div class="dash-item dash-erro">
+        <span class="dash-label">Itens Zerados</span>
+        <span class="dash-valor" id="total-zerados">–</span>
       </div>
     </div>
-   
-    <div class="card">
-      <div class="card-title">Registrar retirada</div>
-      <div class="form-grid">
-        <div class="form-group" style="grid-column:span 2; min-width:0;">
-          <label for="input-retirada">Quantidade a Retirar *</label>
-          <input type="number" id="input-retirada" placeholder="Informe a quantidade" min="1"/>
+ 
+    <div class="linha-acoes">
+ 
+      <div class="card">
+        <div class="card-title">Cadastrar novo material</div>
+        <div class="form-grid">
+          <div class="form-group" style="grid-column:span 2; min-width:0;">
+            <label for="input-nome">Nome do Material *</label>
+            <input type="text" id="input-nome" placeholder="Ex: Luvas de procedimento" autocomplete="off"/>
+          </div>
+          <div class="form-group">
+            <label for="input-categoria">Categoria *</label>
+            <select id="input-categoria">
+              <option value="">Selecione…</option>
+              <option value="consumo">Consumo (descartáveis)</option>
+              <option value="permanente">Permanente (equipamentos)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="input-quantidade">Quantidade *</label>
+            <input type="number" id="input-quantidade" placeholder="0" min="0"/>
+          </div>
+          <div class="form-group">
+            <label for="input-unidade">Unidade de Medida</label>
+            <input type="text" id="input-unidade" placeholder="Ex: Caixa, Unidade, Litro"/>
+          </div>
+          <div class="form-group">
+            <label for="input-validade">Data de Validade</label>
+            <input type="date" id="input-validade"/>
+          </div>
+          <div class="form-group" style="grid-column:span 2; min-width:0;">
+            <label for="input-instrutor">Instrutor Responsável</label>
+            <input type="text" id="input-instrutor" placeholder="Nome do instrutor ou setor"/>
+          </div>
+          <div class="form-group" style="grid-column:span 2; min-width:0;">
+            <label for="input-obs">Observações</label>
+            <input type="text" id="input-obs" placeholder="Fornecedor, lote, anotações…"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <!-- btn-cadastrar dispara cadastrarMaterial() no main.js -->
+          <button id="btn-cadastrar">Cadastrar Material</button>
         </div>
       </div>
-      <p class="retirada-info">Clique em <strong>Baixar</strong> na linha do material desejado na tabela abaixo.</p>
-    </div>
  
-  </div>
- 
-  
-  <div class="card">
-    <div class="filtros">
-      <div class="form-group" style="flex:2; min-width:160px;">
-        <label for="input-busca">Buscar por nome</label>
-        <input type="text" id="input-busca" placeholder="Digite para filtrar…"/>
-      </div>
-      <div class="form-group" style="flex:1; min-width:140px;">
-        <label for="filtro-cat">Categoria</label>
-        <select id="filtro-cat">
-          <option value="">Todas</option>
-          <option value="consumo">Consumo</option>
-          <option value="permanente">Permanente</option>
-        </select>
-      </div>
-      <button id="btn-exportar">Exportar CSV</button>
-      <button id="btn-refresh">Atualizar</button>
-    </div>
- 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Material</th>
-            <th>Categoria</th>
-            <th>Qtd.</th>
-            <th>Unidade</th>
-            <th>Validade</th>
-            <th>Instrutor</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="lista-materiais">
-          <tr class="empty-row">
-            <td colspan="8"><span class="spinner"></span> Carregando…</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
- 
-</main>
- 
-<footer>Sprint 1-2-3 — Almoxarifado SENAC — MockAPI.io</footer>
-<div id="toast"></div>
- 
-<script src="main.js"></script>
-</body>
-</html>
