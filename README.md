@@ -105,23 +105,6 @@ validarRetirada(10, 0);   // false
 
 Cada linha da tabela recebe a classe `estoque-critico` sempre que a quantidade do item for menor que 10 unidades, destacando visualmente quem precisa de reposição urgente. A classe é aplicada dinamicamente pelo `main.js` na renderização da tabela.
 
-## Testes Automatizados
-
-| Arquivo | Cobertura |
-| --- | --- |
-| sprint1.test.js | IDs obrigatórios do formulário e da lista de materiais |
-| sprint2.test.js | Classes de baixa/exclusão e regras lógicas de validarRetirada |
-| sprint3.test.js | IDs de busca e dashboard, e tratamento de erros (try/catch) |
-
-Para executar:
-
-```bash
-npm install
-npm run test:sprint1
-npm run test:sprint2
-npm run test:sprint3
-```
-
 ## Como Executar Localmente
 
 1. Clone ou baixe os arquivos do projeto
