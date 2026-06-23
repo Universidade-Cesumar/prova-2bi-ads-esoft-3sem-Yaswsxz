@@ -1,51 +1,87 @@
-# 📦 Almoxarifado SENAC — onde os algodões não se perdem mais
+# Sistema de Controle de Almoxarifado — SENAC Zona Norte
 
-🔗 **Confere o site no ar:** https://universidade-cesumar.github.io/prova-2bi-ads-esoft-3sem-Yaswsxz/
+🔗 **Acesse o projeto no ar:** https://universidade-cesumar.github.io/prova-2bi-ads-esoft-3sem-Yaswsxz/
 
-## A lenda da planilha que não dava mais conta
+> Sistema web de controle de estoque desenvolvido para o curso técnico de Enfermagem do SENAC Zona Norte, como atividade avaliativa de Engenharia de Software na Unicesumar.
 
-Era uma vez a Camila, enfermeira responsável pelo almoxarifado de itens de saúde do curso de Enfermagem do SENAC Zona Norte, vivendo uma rotina digna de filme de suspense: todo dia um professor retirando luvas, seringas, gaze... tudo anotado (quando dava tempo de anotar) numa planilha que parecia ter vontade própria de se desorganizar.
+## Índice
 
-O problema não era falta de esforço — era que planilha não avisa quando algo tá vencendo, não impede ninguém de "retirar" 15 unidades de um item que só tinha 5, e definitivamente não tem um dashboard bonitinho mostrando o que precisa de atenção. Resultado: estoque no papel virando ficção científica em relação ao estoque real.
+- [Sobre o projeto](#sobre-o-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Sobre o visual](#sobre-o-visual)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Como o projeto foi construído](#como-o-projeto-foi-construído)
+- [Estrutura dos arquivos](#estrutura-dos-arquivos)
+- [Como executar](#como-executar)
 
-Foi daí que nasceu esse projeto: trocar a planilha rebelde por um sisteminha web que faz tudo isso de forma automática, visual e — o mais importante — **chata o suficiente pra não deixar passar besteira**. Sim, o sistema é proposital e teimosamente rígido com as regras de retirada. É praticamente um fiscal de estoque que nunca tira férias.
+## Sobre o projeto
 
-## O que ele realmente faz
+Este projeto foi desenvolvido a partir de um caso real apresentado em sala de aula: a Camila, enfermeira responsável pelo almoxarifado de itens de saúde do curso técnico de Enfermagem do SENAC Zona Norte, controlava todo o estoque em uma planilha simples. Com o aumento do volume de movimentações diárias — entradas de materiais, baixas feitas pelos professores, controle de validade de itens descartáveis — essa planilha já não era mais suficiente.
 
-| Funcionalidade | O que rola na prática |
+Faltava visibilidade rápida sobre o que estava acabando, o que estava vencendo, e não havia nenhuma trava que impedisse, por exemplo, registrar a retirada de mais itens do que realmente existiam em estoque.
+
+A proposta foi sair da planilha e construir uma aplicação web simples, mas funcional, que resolvesse esses problemas de forma direta: cadastro centralizado, regras de validação no momento da retirada, e indicadores visuais que dessem uma visão geral do estoque em poucos segundos.
+
+## Funcionalidades
+
+| Funcionalidade | Descrição |
 | --- | --- |
-| 🟢 Cadastra material | Nome, categoria (consumo ou permanente), quantidade, unidade, validade, instrutor responsável e um cantinho pra observações tipo "fornecedor X, lote Y" |
-| 🟢 Dá baixa no estoque | Desconta sozinho quando alguém retira algo — e é rigoroso: nada de tirar mais do que existe, tirar zero ou tirar número negativo |
-| 🟢 Exclui material | Pergunta "tem certeza?" antes de apagar, porque clique errado existe e ninguém merece perder cadastro por dedo bobo |
-| 🟢 Dashboard | Três números no topo contam a história: total de itens, quantos vencendo, quantos zerados |
-| 🟢 Alertas automáticos | Avisa antes de você rolar a tela e descobrir o problema na pior hora |
-| 🟢 Estoque crítico | Itens com menos de 10 unidades ganham destaque, tipo um "psiu, tô quase acabando" |
-| 🟢 Busca e filtro | Acha qualquer material pelo nome, ou filtra por categoria |
-| 🟢 Exporta CSV | Um clique e a planilha cai prontinha no seu computador |
-| 🟢 Avisos de sucesso/erro | Confirma cada ação, e avisa se algo deu errado em vez de te deixar boiando |
+| Cadastro de materiais | Nome, categoria (consumo ou permanente), quantidade, unidade de medida, validade, instrutor responsável e observações |
+| Registro de retirada (baixa) | Desconta a quantidade informada do estoque, com validação que impede números negativos, zero ou valores maiores do que o disponível |
+| Exclusão de materiais | Remove um item do estoque, com confirmação antes de excluir |
+| Dashboard de indicadores | Mostra o total de itens cadastrados, quantos estão com validade próxima do vencimento e quantos estão zerados |
+| Alertas automáticos | Avisa visualmente quando algum item está vencendo ou chegou a zero |
+| Destaque de estoque crítico | Itens com menos de 10 unidades recebem destaque visual na tabela |
+| Busca e filtro | Localiza materiais pelo nome ou filtra por categoria |
+| Exportação para CSV | Gera um arquivo com todo o estoque atual |
+| Feedback de ações | Notificações de sucesso ou erro a cada ação realizada |
 
-## Sobre a cara do site
+## Sobre o visual
 
-Verde foi a escolha óbvia (e correta) — remete direto a ambiente de saúde, sem forçar a barra. O layout foi separado em blocos bem definidos: um pedaço pra cadastro, outro pra retirada, outro pra visualizar o estoque inteiro, porque misturar tudo numa tela só vira aquela bagunça visual que ninguém quer encarar de manhã.
+A identidade visual foi pensada em tons de verde, fazendo referência ao ambiente de saúde em que o sistema é utilizado. O layout foi organizado em blocos bem definidos — um para cadastro, um para retirada, um para o estoque — para que cada função tenha seu próprio espaço.
 
-A tabela ganhou atenção redobrada, já que é onde a Camila e os professores vão passar mais tempo no dia a dia: espaçamento confortável pra não embolar a vista, números alinhados pra facilitar comparação rápida, e cor só aparece com intenção — quando tem motivo real pra chamar atenção (validade vencendo, estoque baixo, estoque zerado). Fora isso, a tela fica limpa e tranquila, sem gritar o tempo todo.
+A tabela de materiais recebeu atenção especial, já que é onde a Camila e os professores passam mais tempo: linhas bem espaçadas, números alinhados para facilitar comparação, e cores que ganham destaque apenas quando algo precisa de atenção (validade vencendo, estoque baixo ou zerado). O sistema também é responsivo, adaptando-se a diferentes tamanhos de tela.
 
-## Receita por trás dos bastidores
+## Tecnologias utilizadas
 
-| Ingrediente | Pra que serve |
+| Tecnologia | Uso |
 | --- | --- |
-| HTML, CSS e JavaScript puro | A base de tudo, sem framework — porque o básico bem feito resolve igual (ou melhor) |
-| Fetch API + async/await | As conversas entre o site e o back-end, sem travar a tela enquanto espera resposta |
-| MockAPI.io | Guarda os dados de verdade, simulando uma API RESTful sem precisar de servidor próprio |
+| HTML, CSS e JavaScript puro | Estrutura, estilização e lógica da aplicação, sem uso de frameworks |
+| Fetch API + async/await | Comunicação assíncrona com o back-end |
+| MockAPI.io | API RESTful simulada, utilizada como back-end do projeto |
+| try/catch | Tratamento de erros em todas as requisições à API |
+| GitHub Pages | Hospedagem e publicação do projeto |
 
-## Quer rodar na sua máquina?
+## Como o projeto foi construído
 
-1. Baixa os arquivos do projeto
-2. Abre o `index.html` em qualquer navegador
-3. Pronto. Sem instalar nada, sem configurar servidor, sem drama
+O desenvolvimento foi dividido em três etapas (sprints):
+
+**Sprint 1 — Fundação e Inventário**
+Estrutura do formulário de cadastro e da listagem dos materiais já cadastrados.
+
+**Sprint 2 — Regras de Negócio e Saídas**
+Lógica de retirada de estoque, com validação das regras de negócio, e funcionalidade de exclusão de materiais.
+
+**Sprint 3 — Dashboard e Polimento**
+Dashboard de indicadores, alertas automáticos, busca, filtro, exportação em CSV e tratamento de erros.
+
+## Estrutura dos arquivos
+
+```
+almoxarifado-senac/
+├── index.html      → estrutura da página
+├── style.css       → estilos, layout e responsividade
+├── main.js         → lógica da aplicação
+└── package.json    → configuração dos testes automatizados
+```
+
+## Como executar
+
+1. Baixe os arquivos do projeto
+2. Abra o arquivo `index.html` em qualquer navegador
 
 ---
 
-Feito para o SENAC Zona Norte, como atividade avaliativa da prova de Engenharia de Software na Unicesumar.
+Projeto desenvolvido para o SENAC Zona Norte, como atividade avaliativa da prova de Engenharia de Software na Unicesumar.
 
-Yasmin Fernanda de Carvalho — 3º semestre, sobrevivendo e fazendo bonito 💚
+Yasmin Fernanda de Carvalho — 3º semestre
