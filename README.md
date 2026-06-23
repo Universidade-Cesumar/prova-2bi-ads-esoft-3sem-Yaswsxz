@@ -12,32 +12,17 @@ Foi daí que nasceu esse projeto: trocar a planilha rebelde por um sisteminha we
 
 ## O que ele realmente faz
 
-🟢 **Cadastra material**
-Nome, categoria (consumo ou permanente), quantidade, unidade de medida, validade, instrutor responsável e até um cantinho pra observações tipo "fornecedor X, lote Y" — porque detalhe importa.
-
-🟢 **Dá baixa no estoque (a parte chata, mas necessária)**
-Quando alguém retira algo, o sistema desconta sozinho. Só que ele é rigoroso: não deixa tirar mais do que existe, não deixa tirar zero, não deixa tirar número negativo (sim, alguém tentaria, e por isso essa regra existe). Pensa nele como aquele amigo que sempre confere o troco — incômodo na hora, mas salva sua vida depois.
-
-🟢 **Exclui material, com direito a "tem certeza?"**
-Antes de apagar de vez um item, o sistema pergunta se você realmente quer fazer isso. Porque clique errado existe, e ninguém merece perder um cadastro inteiro por um dedo bobo no mouse.
-
-🟢 **Dashboard que conta a história em três números**
-Total de itens, quantos estão vencendo, quantos zeraram. Em três segundos de olhada você já sabe se o dia vai ser tranquilo ou se alguém vai precisar correr pro fornecedor.
-
-🟢 **Alertas que não deixam passar batido**
-Se tem algo vencendo ou zerado, uma faixa de aviso aparece logo no topo — antes mesmo de rolar a página e descobrir o problema na pior hora possível.
-
-🟢 **Estoque crítico com holofote**
-Itens com menos de 10 unidades ganham um destaque na tabela, tipo um "ei, olha aqui, eu tô quase acabando" gritando silenciosamente em vermelho.
-
-🟢 **Busca e filtro pra não ficar rolando a vida inteira**
-Digita o nome do material e pronto, ele aparece. Ou filtra por categoria se quiser ver só os descartáveis ou só os equipamentos.
-
-🟢 **Exporta pra CSV num clique**
-Quer levar os dados pra outro lugar, fazer um relatório, mostrar pra coordenação? Um botão e a planilha cai prontinha.
-
-🟢 **Avisa quando dá certo (e quando dá errado)**
-Cada ação — cadastro, baixa, exclusão — gera uma notificação confirmando. E se a internet falhar ou a API der problema, ele avisa também, em vez de fingir que nada aconteceu e te deixar boiando.
+| Funcionalidade | O que rola na prática |
+| --- | --- |
+| 🟢 Cadastra material | Nome, categoria (consumo ou permanente), quantidade, unidade, validade, instrutor responsável e um cantinho pra observações tipo "fornecedor X, lote Y" |
+| 🟢 Dá baixa no estoque | Desconta sozinho quando alguém retira algo — e é rigoroso: nada de tirar mais do que existe, tirar zero ou tirar número negativo |
+| 🟢 Exclui material | Pergunta "tem certeza?" antes de apagar, porque clique errado existe e ninguém merece perder cadastro por dedo bobo |
+| 🟢 Dashboard | Três números no topo contam a história: total de itens, quantos vencendo, quantos zerados |
+| 🟢 Alertas automáticos | Avisa antes de você rolar a tela e descobrir o problema na pior hora |
+| 🟢 Estoque crítico | Itens com menos de 10 unidades ganham destaque, tipo um "psiu, tô quase acabando" |
+| 🟢 Busca e filtro | Acha qualquer material pelo nome, ou filtra por categoria |
+| 🟢 Exporta CSV | Um clique e a planilha cai prontinha no seu computador |
+| 🟢 Avisos de sucesso/erro | Confirma cada ação, e avisa se algo deu errado em vez de te deixar boiando |
 
 ## Sobre a cara do site
 
@@ -47,7 +32,11 @@ A tabela ganhou atenção redobrada, já que é onde a Camila e os professores v
 
 ## Receita por trás dos bastidores
 
-HTML, CSS e JavaScript puro, sem framework — porque às vezes o básico bem feito resolve igual (ou melhor). As conversas com o back-end acontecem via Fetch API com async/await, e quem guarda tudo é o MockAPI.io, uma API RESTful simulada que dispensa servidor de verdade. Ótimo pra um terceiro semestre que ainda tá se entendendo com banco de dados de produção (calma, vai chegar a nossa hora).
+| Ingrediente | Pra que serve |
+| --- | --- |
+| HTML, CSS e JavaScript puro | A base de tudo, sem framework — porque o básico bem feito resolve igual (ou melhor) |
+| Fetch API + async/await | As conversas entre o site e o back-end, sem travar a tela enquanto espera resposta |
+| MockAPI.io | Guarda os dados de verdade, simulando uma API RESTful sem precisar de servidor próprio |
 
 ## Quer rodar na sua máquina?
 
